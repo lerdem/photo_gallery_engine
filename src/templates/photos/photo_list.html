@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<h1>HELLO</h1>
+	<h1>Photos</h1>
+	
+	{% for photo in object_list %}
+		<!-- TODO notes last msg https://stackoverflow.com/questions/35288793/django-media-url-tag -->
+		<div>
+			<img src="{{ photo.image.url }}" alt="some alt" height="200" width="200">
+			<p>{{ photo.tag_set.all }}</p>
+			<p>{{ photo.comment_set.all }}</p>
+			<p>{{ photo.category_set.all }}</p>
+			
+			{% if photo.voice %}
+				<p>{{ photo.voice }}</p>
+			{% else %}
+				<p>has not voice yet</p>
+			{% endif %}
+		<!-- TODO render empty voice and after increment	 -->
+		</div>
+	{% empty %}
+		<li>No articles yet.</li>
+	{% endfor %}
+
 {% endblock content %}
