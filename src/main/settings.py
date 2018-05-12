@@ -73,18 +73,22 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT'),
-    }
-}
-# http://container-solutions.com/understanding-volumes-docker/
+# https://github.com/kennethreitz/dj-database-url
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.parse(
+        'postgres://postgres:{}@{}:{}/{}'.format(
+            os.environ.get('POSTGRES_PASS'),
+            os.environ.get('POSTGRES_HOST'),
+            os.environ.get('POSTGRES_PORT'),
+            os.environ.get('DB_NAME'),
+        ),
+        conn_max_age=600
+    )
+}
+
+# http://container-solutions.com/understanding-volumes-docker/
 # CREATE DATABASE dev_gallery;
 # CREATE USER root WITH PASSWORD 'root';
 # ALTER ROLE root SET client_encoding TO 'utf8';
