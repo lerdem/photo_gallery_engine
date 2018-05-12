@@ -17,7 +17,7 @@ class Category(CommonInfo):
 class Photo(CommonInfo):
     image = models.ImageField(upload_to='media/')
     description = models.CharField(max_length=256, blank=True, null=True)
-    category = models.ForeignKey(Ca)
+    category = models.ForeignKey(Category)
 
     def __str__(self):
         return f'{self.id} | {self.image}'
