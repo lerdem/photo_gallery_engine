@@ -13,4 +13,4 @@ ADD $prod $APP_DIR
 RUN pip install -r $dev
 COPY . $APP_DIR
 RUN chown -R django_user:django_user $APP_DIR
-USER django_user
+# USER django_user

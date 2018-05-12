@@ -10,14 +10,10 @@ class CommonInfo(models.Model):
         abstract = True
 
 
-class Category(CommonInfo):
-    name = models.CharField(max_length=32, blank=True, null=True)
-
-
 class Photo(CommonInfo):
     image = models.ImageField(upload_to='media/')
     description = models.CharField(max_length=256, blank=True, null=True)
-    category = models.ForeignKey(Category)
+
 
     def __str__(self):
         return f'{self.id} | {self.image}'
@@ -27,8 +23,19 @@ class Photo(CommonInfo):
         ordering = ('created',)
 
 
+class Category(CommonInfo):
+    name = models.CharField(max_length=32, blank=True, null=True)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.id} | {self.name}'
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+
 class Tag(CommonInfo):
-    photo = models.ManyToManyField(Photo)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
     name = models.CharField(max_length=32, blank=True, null=True)
 
     def __str__(self):
