@@ -8,8 +8,8 @@ RUN mkdir -p $APP_DIR &&\
 WORKDIR $APP_DIR
 ARG dev=requirements.dev.txt
 ARG prod=requirements.txt
-COPY $dev $APP_DIR
-COPY $prod $APP_DIR
+ADD $dev $APP_DIR
+ADD $prod $APP_DIR
 RUN pip install -r $dev
 COPY . $APP_DIR
 RUN chown -R django_user:django_user $APP_DIR
