@@ -15,4 +15,5 @@ def current_datetime(request):
 
 class PhotoListView(ListView):
 
-    model = models.Photo
+    # model = models.Photo
+    queryset = models.Photo.objects.all().order_by('-created')

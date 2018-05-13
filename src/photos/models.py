@@ -25,7 +25,7 @@ class Photo(CommonInfo):
 
 class Category(CommonInfo):
     name = models.CharField(max_length=32, blank=True, null=True)
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    photo = models.ManyToManyField(Photo)
 
     def __str__(self):
         return f'{self.id} | {self.name}'
