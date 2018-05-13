@@ -3,3 +3,4 @@ __pycache__/
 *.sublime-*
 media/
 migrations/
+bootstrap-4.1.1/
