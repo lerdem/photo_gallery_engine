@@ -16,4 +16,5 @@ class PhotoAdmin(admin.ModelAdmin):
     inlines = (TagInline, CommentInline)
 
 admin.site.register(models.Photo, PhotoAdmin)
+admin.site.register(models.Voice)
 admin.site.register(models.Category, filter_horizontal=('photo',))

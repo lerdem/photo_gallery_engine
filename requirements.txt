@@ -1,4 +1,4 @@
-django==1.11
+django==1.11.13
 psycopg2-binary
 dj-database-url
 pillow==5.1.0
