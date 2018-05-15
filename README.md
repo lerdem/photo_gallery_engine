@@ -8,6 +8,7 @@
 # Table of contents
 
 - [Installation](#installation)
+- [Start](#start)
 - [Updating](#updating)
 - [Uninstallation](#uninstallation)
 
@@ -17,8 +18,16 @@
 [(Back to top)](#table-of-contents)
 ```
 git clone https://github.com/lerdem/photo_gallery_engine.git
+```
+# Start
+For running project
+```
 cd photo_gallery_engine
 docker-compose up -d --build
+```
+For running migrations
+```
+docker exec -it django_photo_gallery ./src/manage.py migrate
 ```
 
 # Updating
