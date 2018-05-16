@@ -29,6 +29,10 @@ For running migrations
 ```
 docker exec -it django_photo_gallery ./src/manage.py migrate
 ```
+Create super user for django admin
+```
+docker exec -it django_photo_gallery ./src/manage.py createsuperuser
+```
 
 # Updating
 
