@@ -13,15 +13,15 @@
 
 					<div class="container">
 					  <div class="row align-items-center">
-						<div class="col-sm-9">
-							{% if photo.voice %}
-								{{ photo.voice.counter }}
+						<div id="voice-counter-js-{{ photo.id }}" class="col-sm-9">
+							{% if photo.counter %}
+								{{ photo.counter }}
 							{% else %}
 								has not voice yet
 							{% endif %}
 						</div>
 						<div class="col-sm-3">
-							<input id="voice-{{ photo.id }}" class="voice" type="image" src="{% static 'like.png' %}" name="image" data-id="{{ photo.id }}" width="30" height="30">
+							<input id="voice-{{ photo.id }}" class="with-out-like voice" type="image" src="{% static 'like.png' %}" name="image" data-id="{{ photo.id }}" width="30" height="30">
 						</div>
 					  </div>
 					</div>
@@ -54,19 +54,37 @@
 {% block external_js %}
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+		$(document).ready ( function(){
+			var url = "{% url 'photos:get-voice-class-status' %}";
+			$.get(url, function(data, status){
+				for (var photoId in data.res) {
+				    if (data.res.hasOwnProperty(photoId)) {
+				        if (data.res[photoId]) {
+					        var id = "#voice-" + photoId,
+					        	input = $(id);
+					        	input.removeClass('with-out-like')
+				        	
+				        }
+
+				    }
+				}
+
+			});
+		});
 		$('body').on('click', '.voice', function() {
 			var dataId = this.getAttribute("data-id"),
+				self = $(this),
 				// csrf_token = "{{ csrf_token }}",
-				url = "{% url 'photos:add-voice' %}"
+				url = "{% url 'photos:add-voice' %}",
 				params = {
 					photo_id: dataId,
-					counter: 1,
-				}
-			console.log(this.id);
-				$.get(url, params, function(data, status){
-					console.log(data)
-			        console.log("Data: " + data + "\nStatus: " + status);
-			    });
+				};
+			$.get(url, params, function(data, status){
+				self.toggleClass('with-out-like')
+				var id = '#voice-counter-js-' + dataId,
+					input = $(id);
+				input.html(data.res)
+			});
 		});
 
 	</script>

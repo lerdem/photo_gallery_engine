@@ -14,6 +14,7 @@ class CommonInfo(models.Model):
 class Photo(CommonInfo):
     image = models.ImageField(upload_to='media/')
     description = models.CharField(max_length=256, blank=True, null=True)
+    counter = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f'{self.id} | {self.image}'
@@ -56,11 +57,4 @@ class Comment(CommonInfo):
     class Meta:
         verbose_name_plural = 'Comments to Photos'
 
-
-class Voice(CommonInfo):
-    photo = models.OneToOneField(Photo, on_delete=models.CASCADE)
-    counter = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f'{self.id} | {self.counter}'
 
