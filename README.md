@@ -11,7 +11,7 @@
 - [Start](#start)
 - [Updating](#updating)
 - [Uninstallation](#uninstallation)
-
+- [Task-list](https://github.com/lerdem/photo_gallery_engine/blob/master/task-list.md)
 
 # Installation
 
