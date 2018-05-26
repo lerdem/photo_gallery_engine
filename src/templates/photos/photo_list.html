@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-	<div class="card-group">
+	<div id="card-vue" class="card-group">
 		{% for photo in object_list %}
 			<!-- TODO notes last msg https://stackoverflow.com/questions/35288793/django-media-url-tag -->
 			<div class="card">
@@ -48,6 +48,11 @@
 		{% empty %}
 			<li>No photo yet.</li>
 		{% endfor %}
+		<!-- TODO create api -->
+		<br>
+		<div style="display: none" v-for="item in object_list">
+			[[ item ]]
+		</div>
 	</div>
 {% endblock content %}
 
@@ -58,15 +63,15 @@
 			var url = "{% url 'photos:get-voice-class-status' %}";
 			$.get(url, function(data, status){
 				for (var photoId in data.res) {
-				    if (data.res.hasOwnProperty(photoId)) {
-				        if (data.res[photoId]) {
-					        var id = "#voice-" + photoId,
-					        	input = $(id);
-					        	input.removeClass('with-out-like')
-				        	
-				        }
+					if (data.res.hasOwnProperty(photoId)) {
+						if (data.res[photoId]) {
+							var id = "#voice-" + photoId,
+								input = $(id);
+								input.removeClass('with-out-like')
+							
+						}
 
-				    }
+					}
 				}
 
 			});
@@ -87,5 +92,16 @@
 			});
 		});
 
+	</script>
+	<script>
+		// just for test
+		Vue.config.delimiters = ["[[","]]"]
+		var demo = new Vue({
+
+			el: '#card-vue',
+			data: {
+				'object_list': [ {% for photo in object_list %} "{{ photo.description }}", {% endfor %} ]
+			},
+		});
 	</script>
 {% endblock external_js %}
