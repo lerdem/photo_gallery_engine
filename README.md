@@ -12,6 +12,7 @@
 - [Updating](#updating)
 - [Uninstallation](#uninstallation)
 - [Task-list](https://github.com/lerdem/photo_gallery_engine/blob/master/task-list.md)
+- [Branch for Vue js UI](https://github.com/lerdem/photo_gallery_engine/tree/feature/vue-js)
 
 # Installation
 
