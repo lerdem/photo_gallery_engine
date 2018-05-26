@@ -6,8 +6,11 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 
+from rest_framework import viewsets
+
 
 from photos import models
+from photos import serializers
 
 
 class PhotoListView(ListView):
@@ -41,7 +44,6 @@ def add_voice(request):
     inc_counter = p.last().counter + inc
     p.update(counter=inc_counter)
     result = inc_counter
-
     return JsonResponse({'res': result})
 
 
@@ -60,3 +62,8 @@ def get_voice(request):
     result = {photo_id: check_img_class_status(photo_id) for photo_id in photo_ids}
 
     return JsonResponse({'res': result})
+
+
+class PhotoViewSet(viewsets.ModelViewSet):
+    queryset = models.Photo.objects.all()
+    serializer_class = serializers.PhotoSerializer

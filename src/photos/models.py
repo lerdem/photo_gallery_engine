@@ -40,7 +40,7 @@ class Tag(CommonInfo):
     name = models.CharField(max_length=32, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.id} | {self.name}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name_plural = 'Tags to Photos'
@@ -52,9 +52,7 @@ class Comment(CommonInfo):
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return f'{self.id} | {self.user}'
+        return f'{self.id} | {self.comment}'
 
     class Meta:
         verbose_name_plural = 'Comments to Photos'
-
-
